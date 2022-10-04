@@ -15,15 +15,33 @@ export class Matriz{
             for(let j = 0; j < colunas; j++){
                 ary.push(0)  
             }
-            this.data.push(ary);
+            this.data.push(ary);                //adiciona o array criado na matriz no array da classe                             
         }
-        //adiciona o array criado na matriz no array da classe
-
+    }
+    
+    //FUNÇÃO PARA CONVERTER ARRAY EM MATRIZ
+    static array2matriz(ary){
+        let matriz = new Matriz(ary.length, 1);
+        matriz.map((elm, i, j) => {
+            return ary[i];
+        })
+        return matriz;
     }
     
     //FUNÇÃO PARA EXIBIR MATRIZ NO CONSOLE
     print(){
         console.table(this.data);
+    }
+    
+    //FUNÇÃO STATIC MAP PARA TRATAR A CLASSE MATRIZ
+    static map(func) {
+        let matriz = new Matriz(A.linhas, B.colunas)
+        matriz.data = this.data.map((ary, i) => {
+            return ary.map((num, j) => {
+                return func ( num, i, j);
+            })
+        })
+        return matriz;
     }
     
     //FUNÇÃO MAP PARA TRATAR A CLASSE MATRIZ
