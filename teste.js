@@ -11,3 +11,6 @@ B.print();
 
 let C = Matriz.hadamaard(A,B);
 C.print();
+
+C = Matriz.multi_escalar(A,10);
+C.print();
