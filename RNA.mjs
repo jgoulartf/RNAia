@@ -49,7 +49,6 @@ export class RNA{
         //CAMADA DE ENTRADA -> CAMADA OCULTA
         let input = Matriz.array2matriz(arr);
         let hide = Matriz.multi(this.weightsIn2Hide, input);
-
         hide = Matriz.add(hide, this.bias_In2Hide);
 
         hide.map(sigmoid);
@@ -65,17 +64,16 @@ export class RNA{
         let expected = Matriz.array2matriz(target);
         let outputError = Matriz.sub(expected, out);
         let dOutput = Matriz.map(out, dSigmoid)
+        let hiddenT = Matriz.transposer(hide);
 
         let gradient = Matriz.hadamaard(outputError, dOutput);
         gradient = Matriz.multi_escalar(gradient, this.learning_rate);
 
+        // ajuste de bias
         this.bias_Hide2Out = Matriz.add(this.bias_Hide2Out, gradient);
 
-        // Transposta da camada oculta
-        let hiddenT = Matriz.transposer(hide);
-        let weightsHide2OutDelta = Matriz.multi(gradient, hiddenT);
-
         // OUTPUT -> HIDDEN
+        let weightsHide2OutDelta = Matriz.multi(gradient, hiddenT);
         this.weightsHide2Out = Matriz.add(this.weightsHide2Out, weightsHide2OutDelta);
 
         let weightsHide2Out_T = Matriz.transposer(this.weightsHide2Out);
@@ -90,9 +88,7 @@ export class RNA{
         this.bias_In2Hide = Matriz.add(this.bias_In2Hide, gradientH);
 
         let weightsIn2HideDelta = Matriz.multi(gradientH, inputT);
-        weightsIn2HideDelta.print();
         this.weightsIn2Hide = Matriz.add(this.weightsIn2Hide, weightsIn2HideDelta);
-        this.weightsIn2Hide.print();
         // ----------------------------------------------------------
     }
 
@@ -103,7 +99,6 @@ export class RNA{
         //CAMADA DE ENTRADA -> CAMADA OCULTA
         let input = Matriz.array2matriz(arr);
         let hide = Matriz.multi(this.weightsIn2Hide, input);
-
         hide = Matriz.add(hide, this.bias_In2Hide);
 
         hide.map(sigmoid);
