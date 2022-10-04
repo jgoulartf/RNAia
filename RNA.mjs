@@ -41,16 +41,16 @@ export class RNA{
 
         hide = Matriz.add(hide, this.bias_In2Hide);
         
-        hide.print();
-        hide.map(sigmoid);
-        hide.print();
+        hide.print();                                           //teste
+        hide.map(sigmoid);                  
+        hide.print();                                           //teste
 
         //CAMADA OCULTA -> CAMADA DE SAÍDA
         
         let out = Matriz.multi(this.weightsHide2Out, hide);
         out = Matriz.add(out, this.bias_Hide2Out);
         out.map(sigmoid)
-        out.print();
+        out.print();                                            // teste
     }
 }
 

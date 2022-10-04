@@ -19,6 +19,8 @@ export class Matriz{
         }
     }
     
+    /*////FUNÇÕES DIVERSAS////*/
+
     //FUNÇÃO PARA CONVERTER ARRAY EM MATRIZ
     static array2matriz(ary){
         let matriz = new Matriz(ary.length, 1);
@@ -29,7 +31,7 @@ export class Matriz{
     }
     
     //FUNÇÃO PARA EXIBIR MATRIZ NO CONSOLE
-    print(){
+    print(){    
         console.table(this.data);
     }
     
@@ -43,7 +45,7 @@ export class Matriz{
         })
         return matriz;
     }
-    
+
     //FUNÇÃO MAP PARA TRATAR A CLASSE MATRIZ
     map(func) {
         return this.data = this.data.map((ary, i) => {
@@ -52,7 +54,50 @@ export class Matriz{
             })
         })
     }
+
+    //FUNÇÃO PARA OBTER A MARTRIZ TRANSPOSTA
+    static transposer(A){
+        var matriz = new Matriz(A.colunas, A.linhas);
+        matriz.map((num, i, j) => {
+            return A.data[j][i]
+        })
+        return matriz;
+    }
+
+
+    /*////////////////////FIM//////////////////////*/
+
+                /*////OPERAÇÕES MATRIZ X ESCALAR////*/
     
+    //FUNÇÃO PARA MULTIPLICAR UMA MATRIZ POR UM ESCALAR
+    static multi_escalar (A, Escalar){
+        var matriz = new Matriz(A.linhas, A.colunas);
+    
+        matriz.map((num, i, j) =>{       
+            return A.data[i][j] * Escalar;  
+        });
+        
+        return matriz;
+    }
+
+
+
+    /*////////////////////FIM//////////////////////*/
+
+
+    /*////OPERAÇÕES MATRIZ X MATRIZ////*/
+    
+    //FUNÇÃO HADAMAARD
+    static hadamaard (A, B){
+        var matriz = new Matriz(A.linhas, A.colunas);
+    
+        matriz.map((num, i, j) =>{       
+            return A.data[i][j] * B.data[i][j];  
+        });
+        
+        return matriz;
+    }
+
     // FUNÇÃO ADD PARA SOMAR DUAS MATRIZES
     static add (A, B){
         var matriz = new Matriz(A.linhas, A.colunas);
@@ -64,6 +109,17 @@ export class Matriz{
         return matriz;
     }
 
+    
+    // FUNÇÃO SUB PARA SUBTRAIR DUAS MATRIZES
+    static sub (A, B){
+        var matriz = new Matriz(A.linhas, A.colunas);
+    
+        matriz.map((num, i, j) =>{       
+            return A.data[i][j] - B.data[i][j];  
+        });
+        
+        return matriz;
+    }
 
     //FUNÇÃO MULTI PARA MULTIPLICAR MATRIZES
     static multi(A, B){
@@ -85,10 +141,13 @@ export class Matriz{
         return matriz;
     }
 
+    /*////////////////////FIM//////////////////////*/
+    
     //FUNÇÃO PARA RANDOMIZAR VALORES
     randomize(){
         this.map((elm, i, j) =>{
-            return Math.random() * 2 - 1;  //chamo um número randomico e adiciono uma variável.     
+            //return Math.random() * 2 - 1;  //chamo um número randomico e adiciono uma variável.
+            return Math.floor(Math.random() * 10);
         })
     }
 }

@@ -1,7 +1,13 @@
-import{RNA} from './RNA.mjs'
+import{RNA} from './RNA.mjs';
 import { Matriz } from './Matriz.mjs';
 
 
-var rna =  new RNA(1,7,1);
-var ary = [1,2,3,4,5,6,7];
-rna.feedfoward(ary);
+let A = new Matriz(2,1);
+let B = new Matriz(2,1);
+A.randomize();
+A.print();
+B.randomize();
+B.print();
+
+let C = Matriz.hadamaard(A,B);
+C.print();
