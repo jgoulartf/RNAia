@@ -49,8 +49,8 @@ export class RNA{
         
         let out = Matriz.multi(this.weightsHide2Out, hide);
         out = Matriz.add(out, this.bias_Hide2Out);
-
-        //out.print();
+        out.map(sigmoid)
+        out.print();
     }
 }
 
