@@ -29,6 +29,14 @@ export class Matriz{
         })
         return matriz;
     }
+
+    static matriz2array(obj) {
+        let arr = [];
+        obj.map((e, i, j) => {
+            arr.push(e)
+        })
+        return arr;
+    }
     
     //FUNÇÃO PARA EXIBIR MATRIZ NO CONSOLE
     print(){    
@@ -36,9 +44,9 @@ export class Matriz{
     }
     
     //FUNÇÃO STATIC MAP PARA TRATAR A CLASSE MATRIZ
-    static map(func) {
-        let matriz = new Matriz(A.linhas, B.colunas)
-        matriz.data = this.data.map((ary, i) => {
+    static map(A, func) {
+        let matriz = new Matriz(A.linhas, A.colunas)
+        matriz.data = A.data.map((ary, i) => {
             return ary.map((num, j) => {
                 return func ( num, i, j);
             })
