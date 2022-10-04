@@ -1,7 +1,8 @@
 /*Arquivo da biblioteca matriz criado para rede neural*/
 
 //classe matriz
-class Matriz{
+export class Matriz{
+    
     constructor(linhas, colunas){
         this.linhas = linhas;
         this.colunas = colunas;
@@ -12,12 +13,17 @@ class Matriz{
         for(let i =0; i< linhas; i++){                      
             let ary = []
             for(let j = 0; j < colunas; j++){
-                ary.push(Math.floor(Math.random()*10))        //FUNÇÃO PARA GERAR NUMEROS RANDOMICOS E ARREDONDADOS
+                ary.push(0)  
             }
             this.data.push(ary);
         }
         //adiciona o array criado na matriz no array da classe
 
+    }
+    
+    //FUNÇÃO PARA EXIBIR MATRIZ NO CONSOLE
+    print(){
+        console.table(this.data);
     }
     
     //FUNÇÃO MAP PARA TRATAR A CLASSE MATRIZ
@@ -32,52 +38,39 @@ class Matriz{
     // FUNÇÃO ADD PARA SOMAR DUAS MATRIZES
     static add (A, B){
         var matriz = new Matriz(A.linhas, A.colunas);
-        
-        console.log("matriz antes da add : ",matriz); // teste para ver a matriz antes da multiplicação
-        
-        matriz.map((elm) =>{
-            return elm * 2;    // valor de teste para ver se está funcionando, o 2 será retirado, está apenas como teste 
+    
+        matriz.map((num, i, j) =>{       
+            return A.data[i][j] + B.data[i][j];  
         });
-
+        
         return matriz;
     }
 
+
+    //FUNÇÃO MULTI PARA MULTIPLICAR MATRIZES
     static multi(A, B){
         var matriz = new Matriz(A.linhas, B.colunas);
-        
-        console.log("matriz antes da multi : ",matriz); // teste para ver a matriz antes da multiplicação
-        
+                
         matriz.map((num, i, j) => {
             let soma = 0;
+            
             for(let k = 0; k < A.colunas; k++){
                 let aux_1 = A.data [i] [k];
                 let aux_2 = B.data [k] [j];
+                
                 soma += aux_1 * aux_2;
             }
+            
             return soma;
-
         })
-        return matriz;
-
         
+        return matriz;
     }
-       
+
+    //FUNÇÃO PARA RANDOMIZAR VALORES
+    randomize(){
+        this.map((elm, i, j) =>{
+            return Math.random() * 2 - 1;  //chamo um número randomico e adiciono uma variável.     
+        })
+    }
 }
-
-
-
-
-//teste
-
-var m = new Matriz(3, 3);
-var m1 = new Matriz(3, 3);
-
-var m2 = new Matriz(2, 1);
-var m3 = new Matriz(1, 2);
-
-
-// teste função add
-console.log("matriz depois da add : ", Matriz.add(m, m1)); // teste para ver se a função ta funcionando
- 
-// teste função multi
-console.log("matriz depois da multi : ", Matriz.multi(m2, m3)); // teste para ver se a função ta funcionando
