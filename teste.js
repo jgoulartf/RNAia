@@ -45,5 +45,6 @@ function testing() {
   console.log("OBTIDO   -->", rna.predict([1, 0]));
 }
 
-  training();
+training();
+testing();
 

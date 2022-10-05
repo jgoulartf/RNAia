@@ -27,13 +27,13 @@ export class RNA{
         //BIAS
         this.bias_In2Hide = new Matriz (this.hide_nodes, 1);
         this.bias_In2Hide.randomize();
-        this.bias_Hide2Out = new Matriz (this.out_nodes, 1);
+        this.bias_Hide2Out = new Matriz (this.hide_nodes, 1);
         this.bias_Hide2Out.randomize();
         
         //PESOS
         this.weightsIn2Hide = new Matriz(this.hide_nodes, this.in_nodes);
         this.weightsIn2Hide.randomize();
-        this.weightsHide2Out = new Matriz(this.out_nodes, this.hide_nodes);
+        this.weightsHide2Out = new Matriz(this.hide_nodes, this.out_nodes);
         this.weightsHide2Out.randomize();
 
         // Taxa de aprendizado
@@ -49,8 +49,9 @@ export class RNA{
         //CAMADA DE ENTRADA -> CAMADA OCULTA
         let input = Matriz.array2matriz(arr);
         let hide = Matriz.multi(this.weightsIn2Hide, input);
-        hide = Matriz.add(hide, this.bias_In2Hide);
 
+        //hide.print()
+        hide = Matriz.add(hide, this.bias_In2Hide);
         hide.map(sigmoid);
 
         //CAMADA OCULTA -> CAMADA DE SAÍDA
@@ -63,11 +64,13 @@ export class RNA{
         // -----------------------------------------------------------
         let expected = Matriz.array2matriz(target);
         let outputError = Matriz.sub(expected, out);
+        outputError.print()
         let dOutput = Matriz.map(out, dSigmoid)
         let hiddenT = Matriz.transposer(hide);
 
-        let gradient = Matriz.hadamaard(outputError, dOutput);
-        gradient = Matriz.multi_escalar(gradient, this.learning_rate);
+
+        let gradient = Matriz.hadamaard(dOutput, outputError );
+        gradient = Matriz.multi_escalar(gradient, this.learning_rate); // erro
 
         // ajuste de bias
         this.bias_Hide2Out = Matriz.add(this.bias_Hide2Out, gradient);

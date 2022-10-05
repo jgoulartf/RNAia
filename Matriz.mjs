@@ -109,11 +109,10 @@ export class Matriz{
     // FUNÇÃO ADD PARA SOMAR DUAS MATRIZES
     static add (A, B){
         var matriz = new Matriz(A.linhas, A.colunas);
-    
-        matriz.map((num, i, j) =>{       
-            return A.data[i][j] + B.data[i][j];  
+
+        matriz.map((num, i, j) =>{
+            return A.data[i][j] + B.data[i][j];
         });
-        
         return matriz;
     }
 
